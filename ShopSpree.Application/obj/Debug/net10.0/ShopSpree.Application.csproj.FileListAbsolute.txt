@@ -1,0 +1,15 @@
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Application.deps.json
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Application.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Application.pdb
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Domain.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Domain.pdb
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.csproj.AssemblyReference.cache
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.AssemblyInfoInputs.cache
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.AssemblyInfo.cs
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.csproj.CoreCompileInputs.cache
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpre.9158B387.Up2Date
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\refint\ShopSpree.Application.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.pdb
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ref\ShopSpree.Application.dll

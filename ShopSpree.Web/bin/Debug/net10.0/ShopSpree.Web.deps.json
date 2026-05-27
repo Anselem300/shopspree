@@ -1,0 +1,87 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ShopSpree.Web/1.0.0": {
+        "dependencies": {
+          "ShopSpree.Application": "1.0.0",
+          "ShopSpree.Infrastructure": "1.0.0",
+          "ShopSpree.Shared": "1.0.0"
+        },
+        "runtime": {
+          "ShopSpree.Web.dll": {}
+        }
+      },
+      "ShopSpree.Application/1.0.0": {
+        "dependencies": {
+          "ShopSpree.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ShopSpree.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ShopSpree.Domain/1.0.0": {
+        "runtime": {
+          "ShopSpree.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ShopSpree.Infrastructure/1.0.0": {
+        "dependencies": {
+          "ShopSpree.Application": "1.0.0",
+          "ShopSpree.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ShopSpree.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ShopSpree.Shared/1.0.0": {
+        "runtime": {
+          "ShopSpree.Shared.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ShopSpree.Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShopSpree.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShopSpree.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShopSpree.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShopSpree.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

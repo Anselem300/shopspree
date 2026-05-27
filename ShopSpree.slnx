@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="ShopSpree.Application/ShopSpree.Application.csproj" />
+  <Project Path="ShopSpree.Domain/ShopSpree.Domain.csproj" />
+  <Project Path="ShopSpree.Infrastructure/ShopSpree.Infrastructure.csproj" />
+  <Project Path="ShopSpree.Shared/ShopSpree.Shared.csproj" />
+  <Project Path="ShopSpree.Web/ShopSpree.Web.csproj" />
+</Solution>
