@@ -1,0 +1,26 @@
+<div class="input-group mb-3">
+
+    <input class="form-control"
+           @bind="SearchText"
+           placeholder="Search businesses..." />
+
+    <button class="btn btn-primary"
+            @onclick="Search">
+        Search
+    </button>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    private string SearchText = string.Empty;
+
+    private async Task Search()
+    {
+        await OnSearch.InvokeAsync(SearchText);
+    }
+
+}

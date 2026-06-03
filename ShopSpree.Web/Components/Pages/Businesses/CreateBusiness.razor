@@ -1,0 +1,68 @@
+@page "/businesses/create"
+
+@attribute [Authorize]
+
+@inject IBusinessService BusinessService
+@inject IAuthenticateService AuthenticateService
+@inject NavigationManager Navigation
+
+<PageTitle>Create Business</PageTitle>
+
+<h3>Create Business</h3>
+
+<EditForm Model="Model"
+          OnValidSubmit="CreateBusinessAsync">
+
+    <DataAnnotationsValidator />
+
+    <ValidationSummary />
+
+    <InputText class="form-control mb-2"
+               placeholder="Business Name"
+               @bind-Value="Model.BusinessName" />
+
+    <InputTextArea class="form-control mb-2"
+                   placeholder="Description"
+                   @bind-Value="Model.Description" />
+
+    <InputText class="form-control mb-2"
+               placeholder="Address"
+               @bind-Value="Model.Address" />
+
+    <InputText class="form-control mb-2"
+               placeholder="City"
+               @bind-Value="Model.City" />
+
+    <InputText class="form-control mb-3"
+               placeholder="Phone"
+               @bind-Value="Model.PhoneNumber" />
+
+    <button class="btn btn-success">
+        Create Business
+    </button>
+
+</EditForm>
+
+@code {
+
+    private CreateBusinessRequest Model = new();
+
+    private async Task CreateBusinessAsync()
+    {
+        var user =
+            await AuthenticateService
+                .GetCurrentUserAsync();
+
+        if (user == null)
+            return;
+
+        var result =
+        await BusinessService
+        .CreateAsync(Model, user.Id);
+
+        if (result)
+        {
+            Navigation.NavigateTo("/dashboard");
+        }
+    }
+}

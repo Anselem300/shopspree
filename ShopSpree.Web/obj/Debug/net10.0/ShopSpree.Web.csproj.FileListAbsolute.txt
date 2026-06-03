@@ -7,6 +7,23 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Web.
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Web.runtimeconfig.json
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Web.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Web.pdb
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\BCrypt-Net-Next.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\CloudinaryDotNet.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\DnsClient.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\MongoDB.Bson.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\MongoDB.Driver.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\SharpCompress.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\Snappier.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ZstdSharp.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Application.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Domain.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\bin\Debug\net10.0\ShopSpree.Infrastructure.dll
@@ -24,6 +41,7 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.AssemblyInfo.cs
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.csproj.CoreCompileInputs.cache
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.sourcelink.json
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -80,8 +98,6 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\uac
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\k2r0luyi25-{0}-abdmv1u4y3-abdmv1u4y3.gz
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\ghbnk5b234-{0}-hwaxidwiwj-hwaxidwiwj.gz
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\hdhab5tc9l-{0}-xbbil6v7co-xbbil6v7co.gz
-C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\naapo8c0jp-{0}-byia9n8a8v-byia9n8a8v.gz
-C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\vogat3yhox-{0}-byia9n8a8v-byia9n8a8v.gz
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\staticwebassets.development.json
@@ -93,3 +109,5 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\refint\ShopSpr
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.pdb
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ShopSpree.Web.genruntimeconfig.cache
 C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\ref\ShopSpree.Web.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\naapo8c0jp-{0}-gprlgjpx25-gprlgjpx25.gz
+C:\Users\USER\Downloads\shopspree\ShopSpree.Web\obj\Debug\net10.0\compressed\vogat3yhox-{0}-gprlgjpx25-gprlgjpx25.gz

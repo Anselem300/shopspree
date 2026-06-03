@@ -13,3 +13,6 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSp
 C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\refint\ShopSpree.Application.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.pdb
 C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ref\ShopSpree.Application.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\obj\Debug\net10.0\ShopSpree.Application.sourcelink.json
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Shared.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Application\bin\Debug\net10.0\ShopSpree.Shared.pdb

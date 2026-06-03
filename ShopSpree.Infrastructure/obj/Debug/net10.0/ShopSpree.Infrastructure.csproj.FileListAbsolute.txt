@@ -15,3 +15,6 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\obj\Debug\net10.0\Sho
 C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\obj\Debug\net10.0\refint\ShopSpree.Infrastructure.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\obj\Debug\net10.0\ShopSpree.Infrastructure.pdb
 C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\obj\Debug\net10.0\ref\ShopSpree.Infrastructure.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\obj\Debug\net10.0\ShopSpree.Infrastructure.sourcelink.json
+C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\bin\Debug\net10.0\ShopSpree.Shared.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Infrastructure\bin\Debug\net10.0\ShopSpree.Shared.pdb

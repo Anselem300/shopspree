@@ -1,0 +1,63 @@
+@page "/businesses/{Id}"
+
+@inject IBusinessService BusinessService
+@inject IReviewService ReviewService
+
+<PageTitle>Business Details</PageTitle>
+
+@if (Business == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="card">
+
+        <div class="card-body">
+
+            <h2>@Business.BusinessName</h2>
+
+            <p>@Business.Description</p>
+
+            <p>
+                <strong>City:</strong>
+                @Business.City
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                @Business.Address
+            </p>
+
+            <RatingStars Rating="@((int)Business.AverageRating)" />
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <h4>Reviews</h4>
+
+    <ReviewList Reviews="Reviews" />
+}
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    private BusinessDto? Business;
+
+    private IEnumerable<ReviewDto> Reviews =
+        Enumerable.Empty<ReviewDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Business =
+            await BusinessService.GetByIdAsync(Id);
+
+        Reviews =
+            await ReviewService.GetBusinessReviewsAsync(Id);
+    }
+}

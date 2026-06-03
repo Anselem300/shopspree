@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ShopSpree.Domain\ShopSpree.Domain.csproj" />
+   <ProjectReference Include="..\ShopSpree.Domain\ShopSpree.Domain.csproj" />
+   <ProjectReference Include="..\ShopSpree.Shared\ShopSpree.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
   </ItemGroup>
 
   <PropertyGroup>

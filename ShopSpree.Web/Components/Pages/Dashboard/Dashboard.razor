@@ -1,0 +1,96 @@
+@page "/dashboard"
+
+@attribute [Authorize]
+
+@inject IAuthenticateService AuthenticateService
+@inject IBusinessService BusinessService
+@inject AuthenticationStateProvider AuthStateProvider
+
+<PageTitle>Dashboard</PageTitle>
+
+<h3>My Dashboard</h3>
+
+@if (CurrentUser == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="mb-4">
+
+        <h5>
+            Welcome,
+            @CurrentUser.FirstName
+        </h5>
+
+        <p>@CurrentUser.Email</p>
+
+        <NavLink class="btn btn-success"
+                 href="/businesses/create">
+            Add Business
+        </NavLink>
+
+    </div>
+
+    <hr />
+
+    <h4>My Businesses</h4>
+
+    @if (MyBusinesses.Any())
+    {
+        <div class="row">
+
+            @foreach (var business in MyBusinesses)
+            {
+                <div class="col-md-4 mb-3">
+
+                    <BusinessCard Business="business" />
+
+                    <div class="mt-2">
+
+                        <NavLink
+                            class="btn btn-primary btn-sm me-2"
+                            href="@($"/businesses/edit/{business.Id}")">
+                            Edit
+                        </NavLink>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <p>No businesses created yet.</p>
+    }
+}
+
+@code {
+
+    private UserDto? CurrentUser;
+
+    private IEnumerable<BusinessDto> MyBusinesses =
+        Enumerable.Empty<BusinessDto>();
+
+     protected override async Task OnInitializedAsync()
+{
+    var auth =
+        await AuthStateProvider.GetAuthenticationStateAsync();
+
+    var user = auth.User;
+
+    Console.WriteLine(
+        $"Authenticated: {user.Identity?.IsAuthenticated}");
+
+    Console.WriteLine(
+        $"Name: {user.Identity?.Name}");
+
+    foreach (var claim in user.Claims)
+    {
+        Console.WriteLine(
+            $"{claim.Type} = {claim.Value}");
+    }
+ }
+}

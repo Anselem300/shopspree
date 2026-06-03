@@ -1,0 +1,64 @@
+@page "/register"
+@rendermode InteractiveServer
+
+@inject IAuthenticateService AuthenticateService
+@inject NavigationManager Navigation
+
+<PageTitle>Register</PageTitle>
+
+<h3>Create Account</h3>
+
+<EditForm Model="Model"
+          FormName="RegisterForm"
+          OnValidSubmit="RegisterUser">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText class="form-control mb-2"
+               @bind-Value="Model.FirstName"
+               placeholder="First Name" />
+
+    <InputText class="form-control mb-2"
+               @bind-Value="Model.LastName"
+               placeholder="Last Name" />
+
+    <InputText class="form-control mb-2"
+               @bind-Value="Model.Email"
+               placeholder="Email" />
+
+    <InputText class="form-control mb-2"
+               @bind-Value="Model.PhoneNumber"
+               placeholder="Phone Number" />
+
+    <InputText class="form-control mb-2"
+               type="password"
+               @bind-Value="Model.Password"
+               placeholder="Password" />
+
+    <InputText class="form-control mb-3"
+               type="password"
+               @bind-Value="Model.ConfirmPassword"
+               placeholder="Confirm Password" />
+
+    <button type="submit" class="btn btn-success">
+      Register
+    </button>
+
+</EditForm>
+
+@code {
+
+    private RegisterRequest Model = new();
+
+    private async Task RegisterUser()
+    {
+        var result =
+            await AuthenticateService.RegisterAsync(Model);
+
+        if (result)
+        {
+            Navigation.NavigateTo("/login");
+        }
+    }
+}

@@ -26,30 +26,6 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Components/BusinessCard.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wb25lbnRzXEJ1c2luZXNzQ2FyZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Components/Navbar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wb25lbnRzXE5hdmJhci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Components/RatingStars.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wb25lbnRzXFJhdGluZ1N0YXJzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Components/ReviewList.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wb25lbnRzXFJldmlld0xpc3QucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Components/SearchBar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21wb25lbnRzXFNlYXJjaEJhci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Layout/AuthLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQXV0aExheW91dC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Auth/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoXExvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -82,12 +58,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbmRleC5yYXpvcg==
+[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Shared/BusinessCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaGFyZWRcQnVzaW5lc3NDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Shared/RatingStars.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaGFyZWRcUmF0aW5nU3RhcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Shared/ReviewList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaGFyZWRcUmV2aWV3TGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Pages/Shared/SearchBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaGFyZWRcU2VhcmNoQmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/USER/Downloads/shopspree/ShopSpree.Web/Components/Routes.razor]
