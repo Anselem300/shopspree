@@ -1,88 +1,78 @@
+using ShopSpree.Web.Components;
+using ShopSpree.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
-
-using ShopSpree.Infrastructure;
-using ShopSpree.Web.Components;
-using ShopSpree.Web.Services;
-using ShopSpree.Shared.Auth;
-using ShopSpree.Application.Interfaces;
+using ShopSpree.Core.DTOs;
+using ShopSpree.Core.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddHttpContextAccessor();
 
-// ✅ Authentication
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+builder.Services.AddInfrastructure(
+    builder.Configuration);
+
+builder.Services
+    .AddAuthentication(
+        CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath = "/login";
-        options.AccessDeniedPath = "/login";
-        options.ExpireTimeSpan = TimeSpan.FromDays(7);
-        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/";
     });
 
 builder.Services.AddAuthorization();
-builder.Services.AddCascadingAuthenticationState();
-builder.Services.AddHttpClient();
-
-builder.Services.AddHttpClient("ShopSpreeApi", client =>
-{
-    client.BaseAddress =
-        new Uri("http://localhost:5116");
-});
-
-builder.Services.AddScoped(sp =>
-    sp.GetRequiredService<IHttpClientFactory>()
-      .CreateClient("ShopSpreeApi"));
-
-builder.Services.AddScoped<
-    AuthenticationStateProvider,
-    ShopSpreeAuthenticationStateProvider>();
-
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseAntiforgery();
 
+app.MapStaticAssets();
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
 
-// ✅ LOGIN ENDPOINT (FIXED)
-app.MapPost("/api/auth/login", async (
-    LoginRequest request,
-    IAuthenticateService authService,
-    HttpContext http) =>
+app.MapGet("/login-user", async (
+    string email,
+    string password,
+    IUserService userService,
+    HttpContext httpContext) =>
 {
-    Console.WriteLine("LOGIN ENDPOINT HIT");
-
-    var user = await authService.LoginAsync(request);
+    var user = await userService.LoginAsync(
+        new LoginDto
+        {
+            Email = email,
+            Password = password
+        });
 
     if (user is null)
-        return Results.Unauthorized();
-
-    Console.WriteLine($"User found: {user.Email}");
+    {
+        return Results.Redirect("/login");
+    }
 
     var claims = new List<Claim>
     {
         new Claim(ClaimTypes.NameIdentifier, user.Id),
-        new Claim(ClaimTypes.Email, user.Email),
-        new Claim(ClaimTypes.Name,
-            $"{user.FirstName} {user.LastName}")
+        new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+        new Claim(ClaimTypes.Email, user.Email)
     };
 
     var identity = new ClaimsIdentity(
@@ -91,16 +81,11 @@ app.MapPost("/api/auth/login", async (
 
     var principal = new ClaimsPrincipal(identity);
 
-    await http.SignInAsync(
+    await httpContext.SignInAsync(
         CookieAuthenticationDefaults.AuthenticationScheme,
         principal);
 
-    Console.WriteLine("COOKIE CREATED");
-
-    return Results.Ok();
+    return Results.Redirect("/dashboard");
 });
-
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
 
 app.Run();

@@ -1,0 +1,74 @@
+@using ShopSpree.Core.Models
+@using System.Linq
+
+@if (Reviews is null)
+{
+    <p>Loading reviews...</p>
+}
+else if (!Reviews.Any())
+{
+    <p class="text-muted">No reviews yet.</p>
+}
+else
+{
+    <p class="text-muted mb-3">
+        Showing @Math.Min(_displayCount, Reviews.Count)
+        of @Reviews.Count reviews
+    </p>
+
+    @foreach (var review in VisibleReviews)
+    {
+        <div class="border rounded p-3 mb-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <strong>@review.UserName</strong>
+
+                <span class="text-warning">
+                    ⭐ @review.Rating
+                </span>
+
+            </div>
+
+            <p class="mb-0 mt-2">
+                @review.Comment
+            </p>
+
+            <small class="text-muted">
+                @review.CreatedAt.ToLocalTime()
+            </small>
+
+        </div>
+    }
+
+    @if (HasMoreReviews)
+    {
+        <div class="text-center mt-3">
+            <button class="btn btn-outline-primary"
+                    @onclick="LoadMore">
+                See More Reviews
+            </button>
+        </div>
+    }
+}
+
+@code {
+
+    [Parameter]
+    public List<Review>? Reviews { get; set; }
+
+    private int _displayCount = 5;
+
+    private IEnumerable<Review> VisibleReviews =>
+        Reviews?.Take(_displayCount)
+        ?? Enumerable.Empty<Review>();
+
+    private bool HasMoreReviews =>
+        Reviews is not null &&
+        Reviews.Count > _displayCount;
+
+    private void LoadMore()
+    {
+        _displayCount += 5;
+    }
+}

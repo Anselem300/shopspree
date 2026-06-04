@@ -1,0 +1,4 @@
+C:\Users\USER\Downloads\shopspree\ShopSpree.Core\bin\Release\net10.0\publish\ShopSpree.Core.dll
+C:\Users\USER\Downloads\shopspree\ShopSpree.Core\bin\Release\net10.0\publish\ShopSpree.Core.deps.json
+C:\Users\USER\Downloads\shopspree\ShopSpree.Core\bin\Release\net10.0\publish\ShopSpree.Core.pdb
+C:\Users\USER\Downloads\shopspree\ShopSpree.Core\bin\Release\net10.0\publish\MongoDB.Bson.dll

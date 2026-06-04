@@ -1,0 +1,107 @@
+@page "/login"
+
+@using ShopSpree.Core.DTOs
+@using ShopSpree.Core.Interfaces
+
+@inject IUserService UserService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<div class="login-page">
+
+    <div class="login-card shadow">
+
+        <h2 class="text-center mb-4">
+            Welcome Back
+        </h2>
+
+        <p class="text-center text-muted mb-4">
+            Login to continue to ShopSpree
+        </p>
+
+        <EditForm Model="_model"
+                  FormName="LoginForm"
+                  OnValidSubmit="LoginUser">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <InputText class="form-control login-input"
+                           @bind-Value="_model.Email"
+                           placeholder="Email" />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3 position-relative">
+
+                <InputText class="form-control login-input"
+                           @bind-Value="_model.Password"
+                           type="@_passwordType"
+                           placeholder="Password" />
+
+                <button type="button"
+                        class="toggle-password"
+                        @onclick="TogglePassword">
+                    @_passwordIcon
+                </button>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary w-100 login-btn">
+                Login
+            </button>
+
+        </EditForm>
+
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <p class="text-center text-danger mt-3">
+                @_message
+            </p>
+        }
+
+        <div class="text-center mt-3">
+            <small>
+                Don’t have an account?
+                <a href="/register">Register</a>
+            </small>
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+    private LoginDto _model = new();
+    private string? _message;
+
+    // password toggle state
+    private string _passwordType = "password";
+    private string _passwordIcon = "👁";
+
+    private void TogglePassword()
+    {
+        if (_passwordType == "password")
+        {
+            _passwordType = "text";
+            _passwordIcon = "🙈";
+        }
+        else
+        {
+            _passwordType = "password";
+            _passwordIcon = "👁";
+        }
+    }
+
+    private async Task LoginUser()
+    {
+        var url =
+            $"/login-user?email={_model.Email}&password={_model.Password}";
+
+        Navigation.NavigateTo(url, forceLoad: true);
+    }
+}

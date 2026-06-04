@@ -1,0 +1,52 @@
+@page "/businesses"
+
+@using ShopSpree.Core.Interfaces
+@using ShopSpree.Core.Models
+@using ShopSpree.Web.Components.Shared
+
+@inject IBusinessService BusinessService
+
+<h3 class="mb-4">
+    Local Businesses
+</h3>
+
+@if (_businesses is null)
+{
+    <div class="text-center">
+        <p>Loading businesses...</p>
+    </div>
+}
+else if (!_businesses.Any())
+{
+    <div class="alert alert-info">
+        No businesses found.
+    </div>
+}
+else
+{
+    <div class="row">
+
+        @foreach (var business in _businesses)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+
+                <BusinessCard Business="business" />
+
+            </div>
+        }
+
+    </div>
+}
+
+@code {
+
+    private List<Business>? _businesses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _businesses =
+            await BusinessService.GetAllBusinessesAsync();
+
+        Console.WriteLine($"Businesses Count: {_businesses.Count}");
+    }
+}

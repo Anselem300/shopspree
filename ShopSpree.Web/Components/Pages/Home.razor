@@ -1,16 +1,105 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthProvider
 
-<h1>ShopSpree</h1>
+<PageTitle>ShopSpree | Discover Local Businesses</PageTitle>
 
-<p class="lead">
-    Discover trusted local businesses near you.
-</p>
+<div class="home-page">
 
-<div class="mt-4">
+    <!-- HERO SECTION -->
+    <section class="hero">
 
-    <NavLink href="/businesses"
-             class="btn btn-primary">
-        Browse Businesses
-    </NavLink>
+        <div class="hero-content">
+
+            <h1>
+                Discover Local Businesses.<br />
+                Read Reviews. Connect Faster.
+            </h1>
+
+            <p>
+                ShopSpree helps you explore trusted businesses in your community,
+                compare ratings, and make better decisions with real user reviews.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="btn btn-primary btn-lg"
+                        @onclick="GoToLogin">
+                    Sign In
+                </button>
+
+                <button class="btn btn-outline-primary btn-lg"
+                        @onclick="GoToRegister">
+                    Create Account
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="/images/hero_image.png" alt="Businesses" />
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <h2>Why ShopSpree?</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <img src="/images/market.jpg" />
+                <h4>Find Businesses</h4>
+                <p>Discover restaurants, shops, and services near you instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="/images/review.jpg" />
+                <h4>Read Reviews</h4>
+                <p>Get honest feedback from real users before making decisions.</p>
+            </div>
+
+            <div class="feature-card">
+                <img src="/images/xperience.jpg" />
+                <h4>Share Experiences</h4>
+                <p>Help others by reviewing businesses you’ve visited.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+
+        <h2>Join the ShopSpree Community Today</h2>
+
+        <p>
+            Unlock full access to businesses, reviews, and your personalized dashboard.
+        </p>
+
+        <button class="btn btn-light btn-lg"
+                @onclick="GoToRegister">
+            Get Started Free
+        </button>
+
+    </section>
 
 </div>
+
+@code {
+
+    private async Task GoToLogin()
+    {
+        Navigation.NavigateTo("/login");
+    }
+
+    private async Task GoToRegister()
+    {
+        Navigation.NavigateTo("/register");
+    }
+}

@@ -1,11 +1,117 @@
 ﻿@inherits LayoutComponentBase
+@using System.Security.Claims
+@using ShopSpree.Core.Interfaces
+
+@inject AuthenticationStateProvider AuthProvider
+@inject IUserService UserService
+@inject NavigationManager Navigation
 
 <div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
 
-    <NavMenu />
+    <main>
 
-    <main class="container-fluid mt-3">
-        @Body
-    </main>
+        <div class="top-row px-4">
+
+    <a href="@(_isAuthenticated ? "/profile" : "/login")"
+       class="profile-link">
+
+        <div class="profile-container">
+
+            <img src="@(!string.IsNullOrWhiteSpace(_profileImage)
+                        ? _profileImage
+                        : "/images/pngwing.com.png")"
+                 class="layout-profile-image"
+                 alt="Profile" />
+
+            <span class="profile-name">
+                @if (_isAuthenticated)
+                {
+                    @_userName
+                }
+                else
+                {
+                    <span>
+                        👋 Welcome, Guest
+                    </span>
+                }
+            </span>
+
+        </div>
+
+    </a>
 
 </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+
+        <footer class="footer mt-5">
+            <div class="container py-4">
+
+                <hr />
+
+                <div class="text-center">
+                    <h5>ShopSpree</h5>
+
+                    <p>
+                        Discover local businesses, read reviews,
+                        and support your community.
+                    </p>
+
+                    <small>
+                        © @DateTime.Now.Year ShopSpree.
+                        All rights reserved.
+                    </small>
+                </div>
+
+            </div>
+        </footer>
+
+    </main>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@code {
+    private bool _isAuthenticated;
+
+    private string? _profileImage;
+
+    private string? _userName;
+
+    protected override async Task OnInitializedAsync()
+{
+    var authState =
+        await AuthProvider.GetAuthenticationStateAsync();
+
+    var user = authState.User;
+
+    _isAuthenticated =
+        user.Identity?.IsAuthenticated == true;
+
+    var userId =
+        user.FindFirst(ClaimTypes.NameIdentifier)
+        ?.Value;
+
+    if (_isAuthenticated && !string.IsNullOrWhiteSpace(userId))
+    {
+        var appUser =
+            await UserService.GetUserByIdAsync(userId);
+
+        _profileImage = appUser?.ProfileImageUrl;
+        _userName = $"{appUser?.FirstName} {appUser?.LastName}";
+    }
+    else
+    {
+        _userName = "Guest";
+    }
+}
+}

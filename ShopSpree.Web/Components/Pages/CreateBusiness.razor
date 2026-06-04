@@ -1,0 +1,184 @@
+@page "/create-business"
+@attribute [Authorize]
+@rendermode InteractiveServer
+
+@using ShopSpree.Core.DTOs
+@using ShopSpree.Core.Interfaces
+@using System.Security.Claims
+@using ShopSpree.Core.Constants
+
+@inject IBusinessService BusinessService
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+@inject ICloudinaryService CloudinaryService
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-9">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-dark text-white p-4 rounded-top-4">
+                    <h3 class="mb-0">Create Business</h3>
+                    <small class="text-white-50">
+                        Add your business details to get discovered
+                    </small>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body p-4">
+
+                    <EditForm Model="_model"
+                              FormName="CreateBusiness"
+                              OnValidSubmit="Create">
+
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="text-danger mb-3" />
+
+                        <div class="row g-3">
+
+                            <!-- Name -->
+                            <div class="col-md-6">
+                                <label class="form-label">Business Name</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_model.Name" />
+                            </div>
+
+                            <!-- Category -->
+                            <div class="col-md-6">
+                                <label class="form-label">Category</label>
+
+                                <InputSelect class="form-select"
+                                             @bind-Value="_model.Category">
+
+                                    <option value="">-- Select Category --</option>
+
+                                    @foreach (var c in Categories.All)
+                                    {
+                                        <option value="@c">@c</option>
+                                    }
+
+                                </InputSelect>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_model.Email" />
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="col-md-6">
+                                <label class="form-label">Phone</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_model.PhoneNumber" />
+                            </div>
+
+                            <!-- Address -->
+                            <div class="col-md-6">
+                                <label class="form-label">Address</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_model.Address" />
+                            </div>
+
+                            <!-- City -->
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <InputText class="form-control"
+                                           @bind-Value="_model.City" />
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label class="form-label">Description</label>
+                                <InputTextArea class="form-control"
+                                               rows="4"
+                                               @bind-Value="_model.Description" />
+                            </div>
+
+                            <!-- Image Upload -->
+                            <div class="col-12">
+                                <label class="form-label">Business Image</label>
+
+                                <div class="border border-dashed p-3 rounded bg-light text-center">
+
+                                    @if (!string.IsNullOrEmpty(_imageUrl))
+                                    {
+                                        <img src="@_imageUrl"
+                                             class="img-fluid rounded mb-3"
+                                             style="max-height:250px;" />
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted mb-2">
+                                            Upload a business image
+                                        </p>
+                                    }
+
+                                    <InputFile OnChange="UploadImage" class="form-control" />
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="mt-4 d-flex justify-content-between">
+
+                            <a href="/dashboard"
+                               class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+                                Create Business
+                            </button>
+
+                        </div>
+
+                    </EditForm>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    private CreateBusinessDto _model = new();
+    private string _imageUrl = "";
+
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+
+        using var stream = file.OpenReadStream(10 * 1024 * 1024);
+
+        _imageUrl =
+            await CloudinaryService.UploadImageAsync(stream, file.Name);
+    }
+
+    private async Task Create()
+    {
+        var auth = await AuthProvider.GetAuthenticationStateAsync();
+        var userId = auth.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userId is null)
+            return;
+
+        await BusinessService.CreateBusinessAsync(
+            _model,
+            userId,
+            _imageUrl);
+
+        Navigation.NavigateTo("/dashboard");
+    }
+}

@@ -1,0 +1,230 @@
+@page "/dashboard"
+@attribute [Authorize]
+
+@using ShopSpree.Core.Interfaces
+@using ShopSpree.Core.Models
+@using System.Security.Claims
+@rendermode InteractiveServer
+
+@inject IBusinessService BusinessService
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+
+<div class="dashboard-header">
+
+    <div>
+        <h1>My Dashboard</h1>
+        <p>Manage your business listings</p>
+    </div>
+
+    <a href="/create-business"
+       class="btn btn-primary">
+        + Add Business
+    </a>
+
+</div>
+
+@if (_businesses is null)
+{
+    <div class="text-center mt-5">
+        <div class="spinner-border"></div>
+    </div>
+}
+else if (!_businesses.Any())
+{
+    <div class="empty-dashboard">
+
+        <h3>No Businesses Yet</h3>
+
+        <p>
+            Create your first business listing
+            and start attracting customers.
+        </p>
+
+        <a href="/create-business"
+           class="btn btn-primary">
+            Create Business
+        </a>
+
+    </div>
+}
+else
+{
+    <div class="row">
+
+        @foreach (var biz in _businesses)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="card dashboard-card shadow-sm">
+
+                    @if (!string.IsNullOrWhiteSpace(biz.ImageUrl))
+                    {
+                        <img src="@biz.ImageUrl"
+                             class="dashboard-image"
+                             alt="@biz.Name" />
+                    }
+
+                    <div class="card-body">
+
+                        <h4>@biz.Name</h4>
+
+                        <span class="badge bg-primary">
+                            @biz.Category
+                        </span>
+
+                        <p class="mt-3">
+                            @biz.Description
+                        </p>
+
+                        <hr />
+
+                        <p>
+                            <strong>📍 City:</strong>
+                            @biz.City
+                        </p>
+
+                        <p>
+                            <strong>📞 Phone:</strong>
+                            @biz.PhoneNumber
+                        </p>
+
+                        <p>
+                            <strong>✉️ Email:</strong>
+                            @biz.Email
+                        </p>
+
+                        <p>
+                            <strong>⭐ Rating:</strong>
+                            @biz.AverageRating.ToString("0.0")
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer bg-white">
+
+                        <div class="d-flex gap-2">
+
+                            <a href="/business-details/@biz.Id"
+                               class="btn btn-outline-primary flex-fill">
+                                View
+                            </a>
+
+                            <a href="/edit-business/@biz.Id"
+                               class="btn btn-warning flex-fill">
+                                Edit
+                            </a>
+
+                            <button class="btn btn-danger flex-fill"
+                              @onclick="() => ShowDeleteModal(biz)">
+                              Delete
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+
+@if (_showDeleteModal && _selectedBusiness is not null)
+{
+    <div class="modal-backdrop-custom">
+
+        <div class="delete-modal shadow">
+
+            <h4>Delete Business</h4>
+
+            <p>
+                Are you sure you want to delete
+                <strong>@_selectedBusiness.Name</strong>?
+            </p>
+
+            <p class="text-danger">
+                This action cannot be undone.
+            </p>
+
+            <div class="d-flex justify-content-end gap-2">
+
+                <button class="btn btn-secondary"
+                        @onclick="CloseDeleteModal">
+                    Cancel
+                </button>
+
+                <button class="btn btn-danger"
+                        @onclick="ConfirmDelete">
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+@code {
+
+    private List<Business>? _businesses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var auth =
+            await AuthProvider.GetAuthenticationStateAsync();
+
+        var userId =
+            auth.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrWhiteSpace(userId))
+            return;
+
+        _businesses =
+            await BusinessService.GetBusinessesByOwnerAsync(userId);
+    }
+
+    private async Task DeleteBusiness(string id)
+    {
+        await BusinessService.DeleteBusinessAsync(id);
+
+        _businesses?.RemoveAll(x => x.Id == id);
+
+        StateHasChanged();
+    }
+
+    private bool _showDeleteModal;
+
+private Business? _selectedBusiness;
+
+private void ShowDeleteModal(Business business)
+{
+    _selectedBusiness = business;
+    _showDeleteModal = true;
+}
+
+private void CloseDeleteModal()
+{
+    _showDeleteModal = false;
+    _selectedBusiness = null;
+}
+
+private async Task ConfirmDelete()
+{
+    if (_selectedBusiness is null)
+        return;
+
+    await BusinessService.DeleteBusinessAsync(
+        _selectedBusiness.Id);
+
+    _businesses?.RemoveAll(
+        x => x.Id == _selectedBusiness.Id);
+
+    CloseDeleteModal();
+
+    StateHasChanged();
+}
+
+}

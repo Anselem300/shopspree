@@ -1,0 +1,201 @@
+@page "/edit-business/{Id}"
+@attribute [Authorize]
+
+@using ShopSpree.Core.DTOs
+@using ShopSpree.Core.Interfaces
+@using ShopSpree.Core.Models
+@using ShopSpree.Core.Constants
+@rendermode InteractiveServer
+
+@inject IBusinessService BusinessService
+@inject NavigationManager Navigation
+@inject ICloudinaryService CloudinaryService
+
+<div class="edit-business-container">
+
+    <div class="card shadow edit-business-card">
+
+        <div class="card-header">
+            <h3>Edit Business</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (_model is null)
+{
+    <div class="text-center">
+        <div class="spinner-border"></div>
+    </div>
+}
+else
+{
+    <EditForm Model="_model"
+              FormName="EditBusinessForm"
+              OnValidSubmit="SaveChanges">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label>Name</label>
+            <InputText class="form-control"
+                       @bind-Value="_model.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label>Category</label>
+
+            <InputSelect class="form-select"
+                         @bind-Value="_model.Category">
+
+                @foreach (var category in Categories.All)
+                {
+                    <option value="@category">
+                        @category
+                    </option>
+                }
+
+            </InputSelect>
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+
+            <InputText class="form-control"
+                       @bind-Value="_model.Email" />
+        </div>
+
+        <div class="mb-3">
+            <label>Phone</label>
+
+            <InputText class="form-control"
+                       @bind-Value="_model.PhoneNumber" />
+        </div>
+
+        <div class="mb-3">
+            <label>Address</label>
+
+            <InputText class="form-control"
+                       @bind-Value="_model.Address" />
+        </div>
+
+        <div class="mb-3">
+            <label>City</label>
+
+            <InputText class="form-control"
+                       @bind-Value="_model.City" />
+        </div>
+
+        <div class="mb-3">
+            <label>Description</label>
+
+            <InputTextArea class="form-control"
+                           rows="5"
+                           @bind-Value="_model.Description" />
+        </div>
+
+        <div class="mb-3">
+
+    <label>Business Image</label>
+
+    @if (!string.IsNullOrWhiteSpace(_imageUrl))
+    {
+        <div class="mb-2">
+
+            <img src="@_imageUrl"
+                 class="img-fluid rounded"
+                 style="max-height:250px;" />
+
+        </div>
+    }
+
+    <InputFile OnChange="UploadImage" />
+
+</div>
+
+        <div class="mt-4 d-flex gap-2">
+
+    <button type="submit"
+            class="btn btn-success">
+        Save Changes
+    </button>
+
+    <a href="/dashboard"
+       class="btn btn-outline-secondary">
+        Cancel
+    </a>
+
+  </div>
+
+    </EditForm>
+}
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    private string _imageUrl = "";
+
+    private UpdateBusinessDto? _model;
+
+    protected override async Task OnInitializedAsync()
+{
+    var business =
+        await BusinessService.GetBusinessByIdAsync(Id);
+
+    if (business is null)
+        return;
+
+    _imageUrl = business.ImageUrl;
+
+    _model = new UpdateBusinessDto
+    {
+        Id = business.Id,
+        Name = business.Name,
+        Description = business.Description,
+        Category = business.Category,
+        PhoneNumber = business.PhoneNumber,
+        Email = business.Email,
+        Address = business.Address,
+        City = business.City,
+        ImageUrl = business.ImageUrl
+    };
+}
+
+    private async Task UploadImage(InputFileChangeEventArgs e)
+{
+    var file = e.File;
+
+    using var stream =
+        file.OpenReadStream(10 * 1024 * 1024);
+
+    _imageUrl =
+        await CloudinaryService.UploadImageAsync(
+            stream,
+            file.Name);
+}
+
+    private async Task SaveChanges()
+{
+    Console.WriteLine("SAVE CLICKED");
+    Console.WriteLine($"ID: {_model?.Id}");
+    Console.WriteLine($"Name: {_model?.Name}");
+
+    if (_model is null)
+        return;
+
+    _model.ImageUrl = _imageUrl;
+
+    await BusinessService.UpdateBusinessAsync(_model);
+
+    Navigation.NavigateTo("/dashboard");
+}
+
+}

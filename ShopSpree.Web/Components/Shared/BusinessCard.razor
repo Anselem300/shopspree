@@ -1,0 +1,72 @@
+@using ShopSpree.Core.Models
+
+<div class="card h-100 shadow-sm business-card">
+
+    @if (!string.IsNullOrWhiteSpace(Business.ImageUrl))
+    {
+        <img src="@Business.ImageUrl"
+             class="card-img-top business-image"
+             alt="@Business.Name" />
+    }
+    else
+    {
+        <div class="business-placeholder">
+            No Image
+        </div>
+    }
+
+    <div class="card-body">
+
+        <h5 class="card-title">
+            @Business.Name
+        </h5>
+
+        <span class="badge bg-primary mb-2">
+            @Business.Category
+        </span>
+
+        <p class="card-text">
+            @Business.Description
+        </p>
+
+        <hr />
+
+        <p>
+            <strong>📍 City:</strong>
+            @Business.City
+        </p>
+
+        <p>
+            <strong>🏠 Address:</strong>
+            @Business.Address
+        </p>
+
+        <p>
+            <strong>📞 Phone:</strong>
+            @Business.PhoneNumber
+        </p>
+
+        <p>
+            <strong>✉️ Email:</strong>
+            @Business.Email
+        </p>
+
+        <p>
+            <strong>⭐ Rating:</strong>
+            @Business.AverageRating.ToString("0.0")
+        </p>
+    </div>
+
+    <div class="card-footer bg-white">
+        <a class="btn btn-primary w-100"
+           href="/business-details/@Business.Id">
+            View Details
+        </a>
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public Business Business { get; set; } = default!;
+}

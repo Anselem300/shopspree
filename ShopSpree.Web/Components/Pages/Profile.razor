@@ -1,0 +1,180 @@
+@page "/profile"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Forms
+
+@using System.Security.Claims
+@using ShopSpree.Core.DTOs
+@using ShopSpree.Core.Interfaces
+
+@inject ICloudinaryService CloudinaryService
+@inject IUserService UserService
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager Navigation
+
+<h3>My Profile</h3>
+
+@if (_isLoading)
+{
+    <div class="spinner-border"></div>
+}
+else
+{
+    <div class="card shadow p-4">
+
+        @if (!string.IsNullOrWhiteSpace(_model.ProfileImageUrl))
+        {
+            <img src="@_model.ProfileImageUrl"
+                 class="profile-image mb-3" />
+        }
+
+        <EditForm Model="_model"
+                  FormName="ProfileForm"
+                  OnValidSubmit="SaveProfile">
+
+            <DataAnnotationsValidator />
+
+            <div class="mb-3">
+                <label>First Name</label>
+                <InputText class="form-control"
+                           @bind-Value="_model.FirstName" />
+            </div>
+
+            <div class="mb-3">
+                <label>Last Name</label>
+                <InputText class="form-control"
+                           @bind-Value="_model.LastName" />
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <InputText class="form-control"
+                           @bind-Value="_model.Email" />
+            </div>
+
+            <div class="mb-3">
+                <div class="mb-3">
+
+    <label class="form-label">
+        Profile Image
+    </label>
+
+    <InputFile OnChange="UploadProfileImage"
+               accept="image/*" />
+
+@if (_uploading)
+{
+    <p class="text-primary">
+        Uploading image...
+    </p>
+}
+</div>
+            </div>
+
+            <button class="btn btn-primary">
+                Save Changes
+            </button>
+
+        </EditForm>
+
+        <hr />
+
+        <button class="btn btn-danger"
+                @onclick="DeleteAccount">
+            Delete Account
+        </button>
+
+        @if (!string.IsNullOrWhiteSpace(_message))
+        {
+            <div class="alert alert-success mt-3">
+                @_message
+            </div>
+        }
+
+    </div>
+}
+
+@code {
+    private bool _uploading;
+    private UpdateUserDto _model = new();
+
+    private bool _isLoading = true;
+
+    private string _message = string.Empty;
+
+    private string _userId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var auth =
+            await AuthProvider.GetAuthenticationStateAsync();
+
+        var userId =
+            auth.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (string.IsNullOrWhiteSpace(userId))
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        _userId = userId;
+
+        var user =
+            await UserService.GetUserByIdAsync(userId);
+
+        if (user is not null)
+        {
+            _model = new UpdateUserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                ProfileImageUrl = user.ProfileImageUrl
+            };
+        }
+
+        _isLoading = false;
+    }
+
+    private async Task SaveProfile()
+{
+    Console.WriteLine($"Saving image: {_model.ProfileImageUrl}");
+
+    await UserService.UpdateProfileAsync(_model);
+
+    _message = "Profile updated successfully.";
+}
+
+    private async Task DeleteAccount()
+    {
+        await UserService.DeleteUserAsync(_userId);
+
+        Navigation.NavigateTo("/");
+    }
+
+    private async Task UploadProfileImage(
+    InputFileChangeEventArgs e)
+{
+    try
+    {
+        _uploading = true;
+
+        var file = e.File;
+
+        using var stream =
+            file.OpenReadStream(10 * 1024 * 1024);
+
+        var imageUrl =
+            await CloudinaryService.UploadImageAsync(
+                stream,
+                file.Name);
+
+        _model.ProfileImageUrl = imageUrl;
+    }
+    finally
+    {
+        _uploading = false;
+    }
+}
+}
