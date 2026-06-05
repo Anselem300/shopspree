@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "gFTlS0U8sxI=",
+  "dgSpecHash": "GuaMBSeZ0SY=",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Downloads\\shopspree\\ShopSpree.Core\\ShopSpree.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\USER\\.nuget\\packages\\mongodb.bson\\3.9.0\\mongodb.bson.3.9.0.nupkg.sha512"
+    "C:\\Users\\USER\\.nuget\\packages\\mongodb.bson\\3.9.0\\mongodb.bson.3.9.0.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.26\\microsoft.netcore.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.26\\microsoft.windowsdesktop.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.26\\microsoft.aspnetcore.app.ref.8.0.26.nupkg.sha512"
   ],
   "logs": []
 }
