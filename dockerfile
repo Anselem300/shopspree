@@ -21,4 +21,4 @@ WORKDIR /app
 
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "shopspree.web.dll"]
+ENTRYPOINT ["dotnet", "ShopSpree.Web.dll"]
