@@ -12,7 +12,6 @@ C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\BCrypt-Net-Ne
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\CloudinaryDotNet.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\DnsClient.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
-C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
 C:\Users\USER\Downloads\shopspree\ShopSpree.Tests\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
