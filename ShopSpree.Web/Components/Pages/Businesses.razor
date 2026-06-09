@@ -1,5 +1,7 @@
 @page "/businesses"
 
+@rendermode InteractiveServer
+
 @using ShopSpree.Core.Interfaces
 @using ShopSpree.Core.Models
 @using ShopSpree.Web.Components.Shared
@@ -10,13 +12,18 @@
     Local Businesses
 </h3>
 
-@if (_businesses is null)
+<SearchBox
+    Placeholder="Search businesses..."
+    Value="@_searchTerm"
+    ValueChanged="OnSearchChanged" />
+
+@if (_filteredBusinesses is null)
 {
     <div class="text-center">
         <p>Loading businesses...</p>
     </div>
 }
-else if (!_businesses.Any())
+else if (!_filteredBusinesses.Any())
 {
     <div class="alert alert-info">
         No businesses found.
@@ -26,7 +33,7 @@ else
 {
     <div class="row">
 
-        @foreach (var business in _businesses)
+        @foreach (var business in _filteredBusinesses)
         {
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
 
@@ -41,12 +48,46 @@ else
 @code {
 
     private List<Business>? _businesses;
+    private List<Business>? _filteredBusinesses;
+
+    private string _searchTerm = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         _businesses =
             await BusinessService.GetAllBusinessesAsync();
 
+        _filteredBusinesses = _businesses.ToList();
+
         Console.WriteLine($"Businesses Count: {_businesses.Count}");
+    }
+
+    private Task OnSearchChanged(string searchText)
+    {
+        _searchTerm = searchText;
+
+        if (_businesses is null)
+            return Task.CompletedTask;
+
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            _filteredBusinesses = _businesses.ToList();
+        }
+        else
+        {
+            _filteredBusinesses = _businesses
+                .Where(b =>
+                    (!string.IsNullOrWhiteSpace(b.Name) &&
+                     b.Name.Contains(searchText,
+                         StringComparison.OrdinalIgnoreCase))
+                    ||
+                    (!string.IsNullOrWhiteSpace(b.Description) &&
+                     b.Description.Contains(searchText,
+                         StringComparison.OrdinalIgnoreCase))
+                )
+                .ToList();
+        }
+
+        return Task.CompletedTask;
     }
 }

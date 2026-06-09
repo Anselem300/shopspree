@@ -1,0 +1,46 @@
+<div class="input-group mb-4">
+    <span class="input-group-text">
+        <i class="bi bi-search"></i>
+    </span>
+
+    <input class="form-control"
+           placeholder="@Placeholder"
+           value="@Value"
+           @oninput="HandleInput" />
+
+    @if (!string.IsNullOrWhiteSpace(Value))
+    {
+        <button class="btn btn-outline-secondary btn-sm"
+        type="button"
+        title="Clear search"
+        @onclick="ClearSearch">
+    <i class="bi bi-x-lg">Clear</i>
+</button>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string Placeholder { get; set; } = "Search...";
+
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        Value = e.Value?.ToString() ?? string.Empty;
+
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    private async Task ClearSearch()
+    {
+        Value = string.Empty;
+
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShopSpree.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+804a6720aa3573c4d9c529226e1f0e3c82bdf46d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e42e9cd7e62e643ec3bbc018558bb77eca6173f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShopSpree.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShopSpree.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
